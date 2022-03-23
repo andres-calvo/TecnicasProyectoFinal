@@ -3,6 +3,7 @@
   --color-soft-neutral: #bcc2d4;
   --color-black: #080809;
   --color-gray: #5a595d;
+  --up-mobile:40rem;
 }
 html,
 body {

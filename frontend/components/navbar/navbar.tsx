@@ -7,6 +7,7 @@ interface INavbar {
 export const Navbar: React.FunctionComponent<INavbar> = ({ className }) => {
   return (
     <div className={`${className} ${styles.wrapper}`}>
+      <div className={styles.logo}>TuBanco</div>
       <IoNotificationsOutline />
     </div>
   );

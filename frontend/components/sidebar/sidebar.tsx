@@ -10,6 +10,7 @@ import {
 
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useMediaQuery } from "../../hooks";
 interface ISidebar {
   className: string;
 }
@@ -46,10 +47,15 @@ const items: Array<IItem> = [
   },
 ];
 export const Sidebar: React.FunctionComponent<ISidebar> = ({ className }) => {
+  const isDesktop = useMediaQuery("(min-width:40rem)");
   const router = useRouter();
+
   return (
-    <aside className={`${className} ${styles.wrapper}`}>
-      <div className={styles.logo}>TuBanco</div>
+    <aside
+      className={`${className} ${
+        isDesktop ? styles.wrapper : styles.fixedWrapper
+      }`}
+    >
       <ul className={styles.itemList}>
         {items.map((item) => (
           <Item {...item} key={item.text} active={router.asPath == item.href} />
@@ -61,7 +67,7 @@ export const Sidebar: React.FunctionComponent<ISidebar> = ({ className }) => {
 
 const Item: React.FunctionComponent<IItem> = ({ href, text, active, Icon }) => {
   return (
-    <Link href={href} >
+    <Link href={href}>
       <li className={active ? styles.activeItem : styles.item}>
         <Icon />
         <span>{text}</span>

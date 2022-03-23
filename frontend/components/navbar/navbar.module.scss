@@ -3,6 +3,14 @@
     justify-content: flex-end;
     align-items: center;
     margin-right: 30px;
+    .logo{
+        display: flex;
+        align-items: center;
+        height: 40px;
+        font-size: 1.7rem;
+        margin-right: auto;
+        margin-left: 1.5rem;
+    }
     svg{
         width: 20px;
         height: 20px;
