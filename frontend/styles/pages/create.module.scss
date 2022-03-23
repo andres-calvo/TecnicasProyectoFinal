@@ -1,0 +1,13 @@
+.content{
+    display: flex;
+    flex-direction: column;
+    .contentTitle{
+        margin-top: 0;
+    }
+}
+.form{
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(200px,300px));
+    gap: 1rem;
+    max-width: 700px;
+}
