@@ -1,8 +1,12 @@
 .content{
     display: flex;
     flex-direction: column;
+    max-width: 40rem;
+    align-items: flex-end;
+    gap: 1rem;
     .contentTitle{
         margin-top: 0;
+        align-self: flex-start;
     }
 }
 .form{
@@ -10,4 +14,9 @@
     grid-template-columns: repeat(auto-fit,minmax(200px,300px));
     gap: 1rem;
     max-width: 700px;
+}
+.submitBtn{
+    margin-top: 1rem;
+    padding: 1rem 3rem;
+    max-width: fit-content;
 }

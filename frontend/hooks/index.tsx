@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-
+import { useCallback, useEffect, useState } from 'react'
+// Credits to usehooks website
 export function useMediaQuery(query: string): boolean {
   const getMatches = (query: string): boolean => {
     // Prevents SSR issues
@@ -31,4 +31,14 @@ export function useMediaQuery(query: string): boolean {
   }, [query])
 
   return matches
+}
+export const useToggle = (initialState = false):[boolean,()=>void] => {
+  // Initialize the state
+  const [state, setState] = useState(initialState);
+  
+  // Define and memorize toggler function in case we pass down the component,
+  // This function change the boolean value to it's opposite value
+  const toggle = useCallback(() => setState(state => !state), []);
+  
+  return [state, toggle]
 }

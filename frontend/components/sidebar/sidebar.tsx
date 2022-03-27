@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 import styles from "./sidebar.module.scss";
 import { IconType } from "react-icons";
 import {
@@ -6,11 +6,12 @@ import {
   AiOutlineUserDelete,
   AiOutlineUserAdd,
   AiOutlineUserSwitch,
+  AiOutlineMenu,
 } from "react-icons/ai";
 
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useMediaQuery } from "../../hooks";
+import { useMediaQuery, useToggle } from "../../hooks";
 interface ISidebar {
   className: string;
 }
@@ -46,26 +47,36 @@ const items: Array<IItem> = [
     Icon: AiOutlineUserDelete,
   },
 ];
-export const Sidebar: React.FunctionComponent<ISidebar> = ({ className }) => {
+export const Sidebar: FunctionComponent<ISidebar> = ({ className }) => {
   const isDesktop = useMediaQuery("(min-width:40rem)");
   const router = useRouter();
-
+  const [open, toggleOpen] = useToggle(false);
+  const showSidebar = (open && !isDesktop) || isDesktop;
   return (
-    <aside
-      className={`${className} ${
-        isDesktop ? styles.wrapper : styles.fixedWrapper
-      }`}
-    >
-      <ul className={styles.itemList}>
-        {items.map((item) => (
-          <Item {...item} key={item.text} active={router.asPath == item.href} />
-        ))}
-      </ul>
-    </aside>
+    <>
+      {!isDesktop && <MobileMenuOpener open={open} toggleOpen={toggleOpen} />}
+      {showSidebar && (
+        <aside
+          className={`${className} ${
+            isDesktop ? styles.wrapper : styles.fixedWrapper
+          }`}
+        >
+          <ul className={styles.itemList}>
+            {items.map((item) => (
+              <Item
+                {...item}
+                key={item.text}
+                active={router.asPath == item.href}
+              />
+            ))}
+          </ul>
+        </aside>
+      )}
+    </>
   );
 };
 
-const Item: React.FunctionComponent<IItem> = ({ href, text, active, Icon }) => {
+const Item: FunctionComponent<IItem> = ({ href, text, active, Icon }) => {
   return (
     <Link href={href}>
       <li className={active ? styles.activeItem : styles.item}>
@@ -73,5 +84,18 @@ const Item: React.FunctionComponent<IItem> = ({ href, text, active, Icon }) => {
         <span>{text}</span>
       </li>
     </Link>
+  );
+};
+const MobileMenuOpener = ({
+  open,
+  toggleOpen,
+}: {
+  open: boolean;
+  toggleOpen: () => void;
+}) => {
+  return (
+    <div className={styles.menuMobileOpener} onClick={toggleOpen}>
+      <AiOutlineMenu color={open ? "white" : "black"} />
+    </div>
   );
 };

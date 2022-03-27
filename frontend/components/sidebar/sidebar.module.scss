@@ -56,4 +56,13 @@
       }
     }
   }
+  
+}
+.menuMobileOpener{
+  position: fixed;
+  z-index: 100;
+  top: 0.5rem;
+  right: 1rem;
+  font-size: 1.5rem;
+  cursor: pointer;
 }

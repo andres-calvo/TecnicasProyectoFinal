@@ -4,6 +4,7 @@ export {Select} from "./select"
 export {CivilStatus} from "./civil-status"
 export {Age} from "./age"
 export {WorkStatus} from "./work-status"
+export {Cedula} from "./cedula"
 export const maxLengthError = (
     maxLength: number,
     fieldName: string,

@@ -8,6 +8,7 @@ import {
   CivilStatus,
   Age,
   WorkStatus,
+  Cedula,
 } from "../components/form-inputs";
 import styles from "../styles/pages/create.module.scss";
 import { FormProvider, useForm } from "react-hook-form";
@@ -23,13 +24,13 @@ const Create: NextPage = () => {
     mode: "onChange",
   });
   const { isValid, errors } = methods.formState;
-  const onClick = (e:React.FormEvent)=>{
-    e.preventDefault()
-    if(isValid){
-      console.log("Enviado al back")
+  const onClick = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (isValid) {
+      console.log("Enviado al back");
     }
-  }
-  console.log(Object.entries(errors))
+  };
+  console.log(Object.entries(errors));
   return (
     <Layout>
       <SEO
@@ -39,17 +40,26 @@ const Create: NextPage = () => {
       <div className={styles.content}>
         <h2 className={styles.contentTitle}>Registrar</h2>
         <FormProvider {...methods}>
-          <form className={styles.form}>
-            <FullName label="Nombre" name="fullname" />
-            <Email label="Correo Electronico" name="email" />
-            <Age label="Edad" name="age" />
-            <CivilStatus />
-            <WorkStatus />
-            <button className="btn-style" onClick={onClick}>
+          <form>
+            <div className={styles.form}>
+              <FullName label="Nombre" name="fullname" />
+              <Cedula label="Cedula" name="cedula" />
+              <Email label="Correo Electronico" name="email" />
+              <Age label="Edad" name="age" />
+              <CivilStatus />
+              <WorkStatus />
+            </div>
+            <button
+              className={`btn-style ${styles.submitBtn}`}
+              onClick={onClick}
+            >
               Registrar
             </button>
+
             {errors &&
-              Object.entries(errors).map((error) => <span>{error[1]}</span>)}
+              Object.entries(errors).map((error) => (
+                <span>{error[1].message}</span>
+              ))}
           </form>
         </FormProvider>
       </div>
