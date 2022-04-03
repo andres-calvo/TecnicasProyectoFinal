@@ -1,1 +1,1 @@
-web: node run back:prod
+web: npm run back:prod
