@@ -1,0 +1,28 @@
+.table {
+  margin-top: 1rem;
+  tr {
+    td {
+      padding: 0 1rem;
+      border: 1px solid #d4d4d4;
+    }
+  }
+}
+.header {
+  display: flex;
+  th {
+    padding: 0 1rem;
+    border: 1px solid #d4d4d4;
+  }
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(var(--columns), 1fr);
+  td {
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding: 0 1rem;
+    border: 1px solid #d4d4d4;
+  }
+}
