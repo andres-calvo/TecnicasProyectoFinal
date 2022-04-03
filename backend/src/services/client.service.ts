@@ -16,13 +16,39 @@ export const GetClients = async (res) => {
 
 export const GetClientByCedula = async (cedula,res) => {
   try {
-    const client = await ClientModel.findOne({ cedula: cedula }).exec();
+    const client = await ClientModel.findOne({ clientId: cedula }).exec();
     SuccessResponse({data:client,res})
   } catch (error) {
     ErrorResponse({data:{message:"Client does not exist"},res})    
   }
 };
+export const updateClient =async (data,res) => {
+  try {
+    const client = await ClientModel.findOne({ _id: data._id }).exec();
+    client.age = data.age
+    client.score = getScore(data)
+    client.email = data.email
+    client.name = data.name
+    client.work = data.work
+    client.civilstatus = data.civilstatus
+    client.clientId = data.clientId
+    await client.save()
+    SuccessResponse({data:{message:"Success Update"},res})
 
+  } catch (error) {
+    ErrorResponse({data:{message:"Update Failed"},res})    
+    
+  }
+}
+export const deleteClient =async (data,res) => {
+  try {
+    await ClientModel.deleteOne({_id:data._id})
+    SuccessResponse({data:{message:"Success Delete"},res})
+  } catch (error) {
+    ErrorResponse({data:{message:"Delete Failed"},res})    
+    
+  }
+}
 export const createClient = async(data,res)=>{
   const created_at = new Date()
   const score = getScore(data)
