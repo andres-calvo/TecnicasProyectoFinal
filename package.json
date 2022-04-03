@@ -10,10 +10,12 @@
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "cd backend && npm run build",
+    "start":"cd backend && node ./src/server.js",
     "back:prod":"cd backend && npm run start:prod",
     "back:dev": "cd backend && npm run start:dev",
     "front:dev": "cd frontend && npm run dev",
-    "start": "concurrently npm:back:dev npm:front:dev"
+    "start:concurrent": "concurrently npm:back:dev npm:front:dev"
   },
   "keywords": [],
   "author": "",
