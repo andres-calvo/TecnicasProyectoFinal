@@ -1,0 +1,47 @@
+[
+  {
+    "name": "Andres Calvo",
+    "email": "andrex200312@gmail.com",
+    "clientId":10045,
+    "age": 19,
+    "civilstatus": "Soltero",
+    "score":15,
+    "work": true
+  },
+  {
+    "name": "Test User 1",
+    "email": "email1@gmail.com",
+    "clientId":10046,
+    "age": 22,
+    "civilstatus": "Casado",
+    "score":12,
+    "work": true
+  },
+  {
+    "name": "Test User 2",
+    "email": "email2@gmail.com",
+    "clientId":10047,
+    "age": 30,
+    "civilstatus": "Soltero",
+    "score":11,
+    "work": false
+  },
+  {
+    "name": "Test User 3",
+    "email": "email3@gmail.com",
+    "clientId":10048,
+    "age": 40,
+    "civilstatus": "Soltero",
+    "score":12,
+    "work": true
+  },
+  {
+    "name": "Test User 4",
+    "email": "email4@gmail.com",
+    "clientId":10049,
+    "age": 25,
+    "civilstatus": "Soltero",
+    "score":15,
+    "work": true
+  }
+]

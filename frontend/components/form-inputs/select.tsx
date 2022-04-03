@@ -1,3 +1,4 @@
+import { ErrorMessage } from "@hookform/error-message";
 import React, { FunctionComponent } from "react";
 import { useFormContext } from "react-hook-form";
 import { SelectInputInterface } from "./interfaces";
@@ -8,7 +9,8 @@ export const Select: FunctionComponent<SelectInputInterface> = ({
   options,
   showLabel = true,
 }) => {
-  const { register } = useFormContext();
+  const { register, formState } = useFormContext();
+  const { errors } = formState;
   return (
     <label className="label-style">
       {showLabel && label}
@@ -22,6 +24,7 @@ export const Select: FunctionComponent<SelectInputInterface> = ({
           <option {...opt} key={opt.value} />
         ))}
       </select>
+      <ErrorMessage errors={errors} name={name} />
     </label>
   );
 };

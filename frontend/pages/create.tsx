@@ -12,25 +12,22 @@ import {
 } from "../components/form-inputs";
 import styles from "../styles/pages/create.module.scss";
 import { FormProvider, useForm } from "react-hook-form";
-interface CreateForm {
-  fullname: string;
-  email: string;
-  age: number;
-  civilstatus: string;
-  work: string;
-}
+import { CreateForm, registrarCliente } from "../services/register.service";
+
 const Create: NextPage = () => {
   const methods = useForm<CreateForm>({
     mode: "onChange",
   });
-  const { isValid, errors } = methods.formState;
+
+  const { isValid } = methods.formState;
   const onClick = (e: React.FormEvent) => {
     e.preventDefault();
+    methods.trigger();
     if (isValid) {
       console.log("Enviado al back");
+      registrarCliente(methods.getValues());
     }
   };
-  console.log(Object.entries(errors));
   return (
     <Layout>
       <SEO
@@ -42,24 +39,20 @@ const Create: NextPage = () => {
         <FormProvider {...methods}>
           <form>
             <div className={styles.form}>
-              <FullName label="Nombre" name="fullname" />
-              <Cedula label="Cedula" name="cedula" />
+              <FullName label="Nombre" name="name" />
+              <Cedula label="Cedula" name="clientId" />
               <Email label="Correo Electronico" name="email" />
               <Age label="Edad" name="age" />
               <CivilStatus />
               <WorkStatus />
             </div>
             <button
+              type="submit"
               className={`btn-style ${styles.submitBtn}`}
               onClick={onClick}
             >
               Registrar
             </button>
-
-            {errors &&
-              Object.entries(errors).map((error) => (
-                <span>{error[1].message}</span>
-              ))}
           </form>
         </FormProvider>
       </div>

@@ -1,3 +1,4 @@
+import { ErrorMessage } from "@hookform/error-message";
 import React from "react";
 import { useFormContext } from "react-hook-form";
 import { FormInputInterface } from "./interfaces";
@@ -7,7 +8,8 @@ export const Cedula: FormInputInterface = ({
   showLabel = true,
   name,
 }) => {
-  const { register } = useFormContext();
+  const { register,formState } = useFormContext();
+  const {errors} = formState
 
   return (
     <label className="label-style">
@@ -21,8 +23,10 @@ export const Cedula: FormInputInterface = ({
             value: true,
             message: "La cedula es requerida",
           },
+          valueAsNumber:true
         })}
       />
+      <ErrorMessage errors={errors} name={name}/>
     </label>
   );
 };

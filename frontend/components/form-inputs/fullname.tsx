@@ -1,6 +1,7 @@
+import { ErrorMessage } from "@hookform/error-message";
 import React from "react";
 import { useFormContext } from "react-hook-form";
-import { minLengthError } from ".";
+import { minLengthError, requiredError } from ".";
 import { FormInputInterface } from "./interfaces";
 
 export const FullName: FormInputInterface = ({
@@ -8,7 +9,8 @@ export const FullName: FormInputInterface = ({
   name,
   showLabel = true,
 }) => {
-  const { register } = useFormContext();
+  const { register,formState } = useFormContext();
+  const {errors} = formState
   return (
     <label className="label-style">
       {showLabel && label}
@@ -16,13 +18,14 @@ export const FullName: FormInputInterface = ({
         type="text"
         className="input-style"
         {...register(name, {
-          required: true,
+          required: requiredError(label),
           minLength: {
             value:8,
             message:minLengthError(8,label)
           },
         })}
       />
+      <ErrorMessage errors={errors} name={name} />
     </label>
   );
 };
