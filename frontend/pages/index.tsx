@@ -15,8 +15,8 @@ const rowOrder = [
   "work",
   "score",
 ];
-const rowMobileOrder= ["name","age","score"]
-const header:{[key:string]:string} = {
+const rowMobileOrder = ["name", "age", "score"];
+const header: { [key: string]: string } = {
   name: "Nombre",
   age: "Edad",
   email: "Email",
@@ -27,52 +27,70 @@ const header:{[key:string]:string} = {
 };
 const Home: NextPage = () => {
   const [tableHeader, setTableHeader] = useState(rowOrder);
-  const [colCount, setColCount] = useState(7)
+  const [colCount, setColCount] = useState(7);
   const [clients, setClients] = useState<Array<ClientDb>>([]);
-  const isDesktop = useMediaQuery("(min-width:1024px)")
+  const isDesktop = useMediaQuery("(min-width:1024px)");
   useEffect(() => {
     getClientsData().then((resp) => setClients(resp));
   }, []);
   useEffect(() => {
-    setTableHeader(isDesktop? rowOrder:rowMobileOrder)
-    setColCount(isDesktop? 7:3)
-  }, [isDesktop])
-  
+    setTableHeader(isDesktop ? rowOrder : rowMobileOrder);
+    setColCount(isDesktop ? 7 : 3);
+  }, [isDesktop]);
+
   return (
     <Layout>
       <SEO title="TuBanco | Home" description="Bienvenido a tu banco" />
       Últimos clientes
-      <div>
-        <table className={styles.table}>
-          <tbody className={styles.grid} style={{"--columns":colCount} as CSSProperties}>
-            {/* <tr className={styles.header}> */}
-              {tableHeader.map(col => <td key={col} title={header[col]}>{header[col]}</td>)}
-            {/* </tr> */}
-            {clients.map((client) => {
-              return <ClientRow key={client._id} client={client} tableHeader={tableHeader}/>;
-            })}
-          </tbody>
-        </table>
-      </div>
+      <table className={styles.table}>
+        <tbody
+          className={styles.grid}
+          style={{ "--columns": colCount } as CSSProperties}
+        >
+          {tableHeader.map((col) => (
+            <td key={col} title={header[col]}>
+              {header[col]}
+            </td>
+          ))}
+          {clients.map((client) => {
+            return (
+              <ClientRow
+                key={client._id}
+                client={client}
+                tableHeader={tableHeader}
+              />
+            );
+          })}
+        </tbody>
+      </table>
     </Layout>
   );
 };
 
 export default Home;
-const ClientRow = ({client,tableHeader}:{client:{[key:string]:any},tableHeader:string[]})=>{
+const ClientRow = ({
+  client,
+  tableHeader,
+}: {
+  client: { [key: string]: any };
+  tableHeader: string[];
+}) => {
   return (
-    <>{tableHeader.map(col => {
-      const value = ClientCol({data:client[col]})
-      return (
-        <td key={col+client._id} title={value}>{value}</td>
-      )})}
+    <>
+      {tableHeader.map((col) => {
+        const value = ClientCol({ data: client[col] });
+        return (
+          <td key={col + client._id} title={value}>
+            {value}
+          </td>
+        );
+      })}
     </>
-  )
-}
-const ClientCol = ({data}:{data:any})=>{
-  if(typeof data == "boolean"){
-
-    return data? "Si":"No"
+  );
+};
+const ClientCol = ({ data }: { data: any }) => {
+  if (typeof data == "boolean") {
+    return data ? "Si" : "No";
   }
-  return data
-}
+  return data;
+};

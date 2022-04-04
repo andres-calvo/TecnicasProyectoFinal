@@ -17,6 +17,8 @@
 .grid {
   display: grid;
   grid-template-columns: repeat(var(--columns), 1fr);
+  max-height: 300px;
+  overflow-y: auto;
   td {
     min-width: 0;
     overflow: hidden;
