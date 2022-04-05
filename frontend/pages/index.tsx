@@ -42,8 +42,8 @@ const Home: NextPage = () => {
     <Layout>
       <SEO title="TuBanco | Home" description="Bienvenido a tu banco" />
       Últimos clientes
-      <table className={styles.table}>
-        <tbody
+      <div className={styles.table}>
+        <div
           className={styles.grid}
           style={{ "--columns": colCount } as CSSProperties}
         >
@@ -61,8 +61,8 @@ const Home: NextPage = () => {
               />
             );
           })}
-        </tbody>
-      </table>
+        </div>
+      </div>
     </Layout>
   );
 };

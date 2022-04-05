@@ -1,8 +1,6 @@
 export const getClientsData = async () => {
   try {
-    const resp = await fetch("http://127.0.0.1:5000/");
-
-    console.log(resp);
+    const resp = await fetch("https://secure-lake-76119.herokuapp.com/");
     return resp.json();
   } catch (error) {}
 };

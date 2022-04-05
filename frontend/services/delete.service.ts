@@ -3,7 +3,7 @@ import { ClientDb } from "../interfaces/client.interface";
 
 export const DeleteClientInDb = async (data:ClientDb) => {
     try {
-      const resp = await fetch(`http://127.0.0.1:5000/client`, {
+      const resp = await fetch(`https://secure-lake-76119.herokuapp.com/client`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),

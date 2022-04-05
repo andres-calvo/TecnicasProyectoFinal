@@ -6,7 +6,7 @@ const onError = () => {
 export const SearchClientInDb = async ({ clientId }: { clientId: string }) => {
   try {
     const resp = await fetch(
-      `http://127.0.0.1:5000/update?clientId=${clientId}`
+      `https://secure-lake-76119.herokuapp.com/update?clientId=${clientId}`
     );
     if (resp.status == 404) throw Error("404");
     return await resp.json();
@@ -18,7 +18,7 @@ export const UpdateClientInDb = async (data:ClientDb) => {
   try {
     //@ts-ignore
     data.work = data.work == "Si";
-    const resp = await fetch(`http://127.0.0.1:5000/update`, {
+    const resp = await fetch(`https://secure-lake-76119.herokuapp.com/update`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
